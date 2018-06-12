@@ -32,7 +32,12 @@ extension String {
         }
     }
     subscript(start: Int, stop: Int) -> String {
-        return String(self.getCharList()[start..<stop])
+        switch (start, stop){
+        case let (x, y) where x > y:
+            return String(self.getCharList()[stop..<start].reversed())
+        default:
+            return String(self.getCharList()[start..<stop])
+        }
     }
     subscript(range: CountableRange<Int>) -> String {
         return String(self.getCharList()[range])
@@ -58,6 +63,7 @@ print(s.getCharList())
 print(s[1])
 print(s[-1])
 print(s[0, 5])
+print(s[5, 0])
 print(s[3...6])
 print(s[2..<10])
 print(s[...15])
